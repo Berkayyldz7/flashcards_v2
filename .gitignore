@@ -1,0 +1,15 @@
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/build/
+frontend/dist/
+frontend/.turbo/
+
+# Backend
+backend/node_modules/
+backend/__pycache__/
+backend/.venv/
+
+# Genel
+*.log
+.DS_Store
