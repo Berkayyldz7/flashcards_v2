@@ -77,14 +77,14 @@ export default function Card({ cards, mode = 'sequential', direction = 'EN_TR', 
         <>
           <div className="text-xs uppercase tracking-wide text-indigo-700/80 mb-2">{card?.partOfSpeech || 'term'}</div>
           <div className="text-2xl sm:text-3xl font-semibold">{card?.term || '—'}</div>
-          <div className="mt-2 text-gray-700">{card?.definitionEn || '—'}</div>
+          <div className="mt-2 text-gray-700 dark:text-gray-200">{card?.definitionEn || '—'}</div>
           {card?.ipa ? <div className="mt-1 text-sm text-gray-500">{card.ipa}</div> : null}
           {card?.collocations?.length ? (
             <div className="mt-3">
-              <div className="text-xs font-medium text-gray-500 mb-1">Collocations</div>
+              <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Collocations</div>
               <div className="flex flex-wrap gap-2">
                 {card.collocations.slice(0, 6).map((c, i) => (
-                  <span key={i} className="px-2 py-1 text-xs rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">
+                  <span key={i} className="px-2 py-1 text-xs rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-200 dark:border-indigo-800">
                     {c}
                   </span>
                 ))}
@@ -130,7 +130,7 @@ export default function Card({ cards, mode = 'sequential', direction = 'EN_TR', 
       <>
         <div className="text-xs uppercase tracking-wide text-indigo-700/80 mb-2">{card?.partOfSpeech || 'term'}</div>
         <div className="text-2xl sm:text-3xl font-semibold">{card?.term || '—'}</div>
-        <div className="mt-2 text-gray-700">{card?.definitionEn || '—'}</div>
+        <div className="mt-2 text-gray-700 dark:text-gray-200">{card?.definitionEn || '—'}</div>
         {card?.ipa ? <div className="mt-1 text-sm text-gray-500">{card.ipa}</div> : null}
         {card?.examples?.length ? (
           <div className="mt-4 space-y-2">
@@ -151,19 +151,20 @@ export default function Card({ cards, mode = 'sequential', direction = 'EN_TR', 
     <div className="mx-auto w-full max-w-3xl">
       <div className="relative h-64 sm:h-80 [perspective:1000px]">
         <div
-          className={`absolute inset-0 rounded-2xl shadow-xl border bg-white transition-transform duration-500 [transform-style:preserve-3d] ${
-            flipped ? '[transform:rotateY(180deg)]' : ''
-          }`}
+          // className={`absolute inset-0 rounded-2xl shadow-xl border bg-white transition-transform duration-500 [transform-style:preserve-3d] ${
+          //   flipped ? '[transform:rotateY(180deg)]' : ''
+          // }`}
+          className={`absolute inset-0 rounded-2xl shadow-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/95 transition-transform duration-500 [transform-style:preserve-3d] ${flipped ? '[transform:rotateY(180deg)]' : ''}`}
           aria-live="polite"
         >
           {/* front */}
           <div className="absolute inset-0 p-6 sm:p-8 [backface-visibility:hidden] flex flex-col justify-between">
             <div><FrontBlock /></div>
             <div className="flex items-center justify-between">
-              <button className="px-3 py-2 rounded-lg border hover:bg-gray-50" onClick={flip} aria-label="Kartı çevir (Space)">
+              <button className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" onClick={flip} aria-label="Kartı çevir (Space)">
                 Ön/Arka (Space)
               </button>
-              <div className="text-sm text-gray-500">{index + 1} / {order.length}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{index + 1} / {order.length}</div>
             </div>
           </div>
 
@@ -172,8 +173,8 @@ export default function Card({ cards, mode = 'sequential', direction = 'EN_TR', 
             <div><BackBlock /></div>
             <div className="flex gap-2 justify-between items-center">
               <div className="flex gap-2">
-                <button className="px-3 py-2 rounded-lg border hover:bg-gray-50" onClick={flip}>Ön Yüz</button>
-                <button className="px-3 py-2 rounded-lg border hover:bg-gray-50" onClick={next} aria-label="Sonraki (N)">Sonraki (N)</button>
+                <button className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" onClick={flip}>Ön Yüz</button>
+                <button className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" onClick={next} aria-label="Sonraki (N)">Sonraki (N)</button>
               </div>
               <div className="flex gap-2">
                 <ScoreButton onClick={() => onScore && onScore(card, 'again')} label="Again" k="1" />

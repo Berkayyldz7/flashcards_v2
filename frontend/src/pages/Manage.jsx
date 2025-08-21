@@ -130,7 +130,7 @@ export default function Manage() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <section className="rounded-xl border p-4">
+      <section className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
         <h3 className="font-medium mb-1">Yeni Kart Ekle</h3>
         <p className="text-xs text-gray-500 mb-3">Aktif konu: <b>{topic}</b> (formda değiştirebilirsin)</p>
         <CardForm
@@ -139,7 +139,7 @@ export default function Manage() {
         />
       </section>
 
-      <section className="rounded-xl border p-4">
+      <section className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium">Kartlar</h3>
           <button onClick={load} className="px-3 py-1 rounded border hover:bg-gray-50">Yenile</button>

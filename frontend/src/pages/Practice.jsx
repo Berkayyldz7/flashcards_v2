@@ -162,7 +162,7 @@ export default function Practice() {
         <h2 className="text-lg font-semibold">Pratik <span className="text-gray-500 text-sm">({topic})</span></h2>
         <div className="flex flex-wrap items-center gap-3">
           <label className="text-sm text-gray-600">Sıra:</label>
-          <select value={orderMode} onChange={e=>setOrderMode(e.target.value)} className="rounded-lg border px-2 py-1">
+          {/* <select value={orderMode} onChange={e=>setOrderMode(e.target.value)} className="rounded-lg border px-2 py-1">
             <option value="sequential">Sıralı</option>
             <option value="random">Rastgele</option>
           </select>
@@ -172,12 +172,43 @@ export default function Practice() {
             <option value="EN_TR">EN → TR</option>
             <option value="TR_EN">TR → EN</option>
             <option value="MIXED">Karışık</option>
+          </select> */}
+
+          <select
+            value={orderMode}
+            onChange={e => setOrderMode(e.target.value)}
+            className="
+              rounded-lg border px-2 py-1
+              border-gray-300 bg-white text-gray-900 hover:bg-gray-50
+              dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-800
+              transition-colors
+            "
+          >
+            <option value="sequential">Sıralı</option>
+            <option value="random">Rastgele</option>
           </select>
+
+
+          <select
+            value={direction}
+            onChange={e => setDirection(e.target.value)}
+            className="
+              rounded-lg border px-2 py-1
+              border-gray-300 bg-white text-gray-900 hover:bg-gray-50
+              dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-800
+              transition-colors
+            "
+          >
+            <option value="EN_TR">EN → TR</option>
+            <option value="TR_EN">TR → EN</option>
+            <option value="MIXED">Karışık</option>
+          </select>
+
         </div>
       </div>
 
       {loading ? (
-        <div className="rounded-xl border p-8 text-center text-gray-500">Yükleniyor…</div>
+        <div className="rounded-xl border p-8 text-center text-gray-500 dark:text-gray-400">Yükleniyor…</div>
       ) : (
         <Card cards={cards} mode={orderMode} direction={direction} onScore={onScore} />
       )}
