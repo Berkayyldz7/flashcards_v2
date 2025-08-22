@@ -76,8 +76,8 @@ export default function Card({ cards, mode = 'sequential', direction = 'EN_TR', 
       return (
         <>
           <div className="text-xs uppercase tracking-wide text-indigo-700/80 mb-2">{card?.partOfSpeech || 'term'}</div>
-          <div className="text-2xl sm:text-3xl font-semibold">{card?.term || '—'}</div>
-          <div className="mt-2 text-gray-700 dark:text-gray-200">{card?.definitionEn || '—'}</div>
+          <div className="text-2xl sm:text-3xl font-semibold break-words">{card?.term || '—'}</div>
+          <div className="mt-2 text-gray-700 dark:text-gray-200 break-words">{card?.definitionEn || '—'}</div>
           {card?.ipa ? <div className="mt-1 text-sm text-gray-500">{card.ipa}</div> : null}
           {card?.collocations?.length ? (
             <div className="mt-3">
@@ -149,16 +149,17 @@ export default function Card({ cards, mode = 'sequential', direction = 'EN_TR', 
 
   return (
     <div className="mx-auto w-full max-w-3xl">
-      <div className="relative h-64 sm:h-80 [perspective:1000px]">
+      <div className="relative h-72 sm:h-80 px-3 sm:px-0" style={{ perspective: 1000 }}>
         <div
           // className={`absolute inset-0 rounded-2xl shadow-xl border bg-white transition-transform duration-500 [transform-style:preserve-3d] ${
           //   flipped ? '[transform:rotateY(180deg)]' : ''
           // }`}
-          className={`absolute inset-0 rounded-2xl shadow-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/95 transition-transform duration-500 [transform-style:preserve-3d] ${flipped ? '[transform:rotateY(180deg)]' : ''}`}
+          // className={`absolute inset-0 rounded-2xl shadow-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/95 transition-transform duration-500 [transform-style:preserve-3d] ${flipped ? '[transform:rotateY(180deg)]' : ''}`}
+          className={`absolute inset-0 rounded-2xl shadow-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/95 transition-transform duration-500 card3d ${flipped ? '[transform:rotateY(180deg)]' : ''}`}
           aria-live="polite"
         >
           {/* front */}
-          <div className="absolute inset-0 p-6 sm:p-8 [backface-visibility:hidden] flex flex-col justify-between">
+          <div className="absolute inset-0 p-6 sm:p-8 backface-hidden flex flex-col justify-between">
             <div><FrontBlock /></div>
             <div className="flex items-center justify-between">
               <button className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" onClick={flip} aria-label="Kartı çevir (Space)">
@@ -169,7 +170,7 @@ export default function Card({ cards, mode = 'sequential', direction = 'EN_TR', 
           </div>
 
           {/* back */}
-          <div className="absolute inset-0 p-6 sm:p-8 [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-between">
+          <div className="absolute inset-0 p-6 sm:p-8 backface-hidden [transform:rotateY(180deg)] flex flex-col justify-between">
             <div><BackBlock /></div>
             <div className="flex gap-2 justify-between items-center">
               <div className="flex gap-2">

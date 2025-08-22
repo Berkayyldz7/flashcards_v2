@@ -164,8 +164,11 @@ import { NavLink } from 'react-router-dom';
 import { useTopic, topics } from '../context/TopicContext';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from './ui/select';
 import ThemeToggle from './ThemeToggle';
+import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function Navbar({ count }) {
+  const { user, signout } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(false);
   const { topic, setTopic } = useTopic();
@@ -180,7 +183,7 @@ export default function Navbar({ count }) {
 
   return (
     <header className="sticky top-0 z-10 bg-white/70 dark:bg-gray-900/70 backdrop-blur border-b border-gray-200 dark:border-gray-800">
-      <div className="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between gap-3">
+      <div className="mx-auto max-w-5xl px-4 py-3 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <button
             className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-lg border dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -196,17 +199,17 @@ export default function Navbar({ count }) {
         </div>
 
         {/* Global Topic Select */}
-        <div className="relative">
-          <Select value={topic} onValueChange={handleSelect}>
+        <div className="relative w-full sm:w-auto">
+          <Select className="w-36 sm:w-40 rounded-lg border px-2 py-2 border-gray-300 bg-white text-gray-900 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100" value={topic} onValueChange={handleSelect}>
             {({ value }) => (
               <>
-                <SelectTrigger onClick={() => setOpenDropdown(o => !o)} className="border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/60 hover:bg-white dark:hover:bg-gray-800">
+                <SelectTrigger onClick={() => setOpenDropdown(o => !o)} className=" w-full sm:w-48 border-gray-300 dark:border-gray-700 bg-white/70 dark:bg-gray-900/60 hover:bg-white dark:hover:bg-gray-800">
                   <SelectValue value={value} placeholder="Topic select" />
                 </SelectTrigger>
                 <SelectContent open={openDropdown}>
                   <div className="rounded-md border dark:border-gray-700 bg-white dark:bg-gray-900 shadow">
                     {topics.map(t => (
-                      <SelectItem key={t} value={t} onSelect={handleSelect}>
+                      <SelectItem key={t} value={t} onSelect={handleSelect} className="cursor-pointer focus:bg-indigo-500 focus:text-white dark:focus:bg-indigo-600 dark:focus:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <span className="block px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">{t}</span>
                       </SelectItem>
                     ))}
@@ -226,6 +229,14 @@ export default function Navbar({ count }) {
           <div className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">
             Toplam: <span className="font-semibold">{count ?? 0}</span>
           </div>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-700 dark:text-gray-300">👤 {user.username}</span>
+              <button onClick={signout} className="rounded-lg border px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">Çıkış</button>
+            </div>
+          ) : (
+            <Link to="/login" className="rounded-lg border px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">Giriş</Link>
+          )}
           <ThemeToggle />
         </div>
       </div>

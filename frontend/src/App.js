@@ -5,6 +5,9 @@ import Practice from './pages/Practice';
 import Manage from './pages/Manage';
 import ImportExport from './pages/ImportExport';
 
+import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+
 export default function App() {
   const [count, setCount] = React.useState(0);
 
@@ -32,8 +35,25 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/practice" replace />} />
           <Route path="/practice" element={<Practice />} />
-          <Route path="/manage" element={<Manage />} />
-          <Route path="/import-export" element={<ImportExport />} />
+          {/* <Route path="/manage" element={<Manage />} />
+          <Route path="/import-export" element={<ImportExport />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/manage"
+            element={
+              <ProtectedRoute>
+                <Manage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/import-export"
+            element={
+              <ProtectedRoute>
+                <ImportExport />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<div>404</div>} />
         </Routes>
       </main>

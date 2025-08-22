@@ -40,3 +40,34 @@
   }
   .thin-scrollbar::-webkit-scrollbar-track { background: transparent; }
 }
+
+/* Mobil safe defaults */
+@layer base {
+  * { min-width: 0; }                 /* flex children taşmasın */
+  img, video, canvas { max-width: 100%; height: auto; }
+  a, button, input, select, textarea { font-size: 16px; } /* iOS zoom bug önler */
+  body { -webkit-tap-highlight-color: transparent; }
+}
+
+/* iOS/Safari 3D flip fixleri */
+@layer utilities {
+  .card3d { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
+  .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+}
+
+
+@layer base {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #111827; /* text-gray-900 */
+    transition: background-color 9999s ease-out 0s;
+  }
+  .dark input:-webkit-autofill,
+  .dark input:-webkit-autofill:hover,
+  .dark input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f3f4f6; /* text-gray-100 */
+  }
+}
+
+
