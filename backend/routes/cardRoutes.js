@@ -9,17 +9,19 @@ const {
 } = require('../controllers/cardController');
 
 const router = express.Router();
+const auth = require('../middleware/auth');
+const requireRole = require("../middleware/requireRole");
 
 // Mevcut endpointler
 router.get('/', getCards);
-router.post('/', createCard);
-router.put('/:id', updateCard);
-router.delete('/:id', deleteCard);
+router.post('/', auth, requireRole("admin"), createCard);
+router.put('/:id', auth, requireRole("admin"), updateCard);
+router.delete('/:id', auth, requireRole("admin"), deleteCard);
 
 // JSON'dan toplu ekleme
-router.post('/import', importCardsFromJson);
+router.post('/import', auth, requireRole("admin"), importCardsFromJson);
 
 // JSON export
-router.get('/export', exportCardsToJson);
+router.get('/export', requireRole("admin"), exportCardsToJson);
 
 module.exports = router;

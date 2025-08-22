@@ -1,4 +1,4 @@
-const BASE = process.env.REACT_APP_API_BASE || 'http://localhost:5001';
+const BASE = process.env.REACT_APP_API_BASE || 'http://192.168.1.29:5001';
 
 export function getToken() {
   return localStorage.getItem('token') || '';
