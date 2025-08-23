@@ -1,4 +1,5 @@
-const BASE = process.env.REACT_APP_API_BASE || 'http://192.168.1.44:5001';
+// const BASE = process.env.REACT_APP_API_BASE || 'http://192.168.1.29:5001';
+import { API_BASE } from "../lib/apiBase";
 
 export function getToken() {
   return localStorage.getItem('token') || '';
@@ -9,7 +10,7 @@ export function setToken(t) {
 }
 
 export async function login(username, password) {
-  const res = await fetch(`${BASE}/api/auth/login`, {
+  const res = await fetch(`${API_BASE}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password }),
@@ -19,7 +20,7 @@ export async function login(username, password) {
 }
 
 export async function register(username, password, email) {
-  const res = await fetch(`${BASE}/api/auth/register`, {
+  const res = await fetch(`${API_BASE}/api/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password, email }),
@@ -29,7 +30,7 @@ export async function register(username, password, email) {
 }
 
 export async function me() {
-  const res = await fetch(`${BASE}/api/auth/me`, {
+  const res = await fetch(`${API_BASE}/api/auth/me`, {
     headers: { Authorization: `Bearer ${getToken()}` }
   });
   if (!res.ok) return null;
