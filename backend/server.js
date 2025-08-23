@@ -6,17 +6,21 @@ const cardRoutes = require('./routes/cardRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 
+
 dotenv.config();
 connectDB();
 
 const app = express();
 app.use(cors());
+
 app.use(express.json());
 
 app.use('/api/cards', cardRoutes);
 
 app.get('/', (req, res) => res.send('Backend API çalışıyor 🚀'));
 app.use('/api/auth', authRoutes);
+
+app.get('/healthz', (req, res) => res.type('text').send('ok'));
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

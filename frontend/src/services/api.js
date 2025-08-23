@@ -1,5 +1,5 @@
 import { getToken } from "./auth";
-const BASE = process.env.REACT_APP_API_BASE || 'http://192.168.1.29:5001';
+const BASE = process.env.REACT_APP_API_BASE || 'http://192.168.1.44:5001';
 
 export async function fetchCards(topic) {
   const q = topic && topic !== 'All' ? `?topic=${encodeURIComponent(topic)}` : '';
