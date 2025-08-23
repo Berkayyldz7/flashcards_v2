@@ -8,6 +8,8 @@ import ImportExport from './pages/ImportExport';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 
+import { API_BASE } from "../src/lib/apiBase"
+
 export default function App() {
   const [count, setCount] = React.useState(0);
 
@@ -15,7 +17,7 @@ export default function App() {
   React.useEffect(() => {
     async function readCount() {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE || 'http://localhost:5001'}/api/cards`);
+        const res = await fetch(`${API_BASE}/api/cards`);
         const data = await res.json();
         setCount(data.length || 0);
       } catch { /* ignore */ }
